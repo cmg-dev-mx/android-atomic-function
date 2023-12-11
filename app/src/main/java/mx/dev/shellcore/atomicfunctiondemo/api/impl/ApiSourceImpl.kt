@@ -10,20 +10,7 @@ import kotlin.time.Duration.Companion.seconds
 
 class ApiSourceImpl @Inject constructor() : ApiSource {
 
-    private var updatedTime: Long = 0L
 
-    override suspend fun requireUpdateTime(): Boolean {
-        return if (updatedTime == 0L) {
-            true
-        } else {
-            val currentTime = Calendar.getInstance().timeInMillis
-            currentTime - updatedTime > 10000 // 10 seconds
-        }
-    }
-
-    override suspend fun updateTime(timeInMillis: Long) {
-        updatedTime = timeInMillis
-    }
 
     override suspend fun getInfo(): Info {
         delay(2.seconds)

@@ -13,7 +13,7 @@ class DatabaseSourceImpl @Inject constructor() : DatabaseSource {
     }
 
     override suspend fun getInfo(): Info {
-        return Info("Atomic Function", "This is a demo of Atomic Function from the db")
+        return Info("Atomic Function", "This is a demo of Atomic Function from the data base")
     }
 
     override suspend fun saveInfo(info: Info) {

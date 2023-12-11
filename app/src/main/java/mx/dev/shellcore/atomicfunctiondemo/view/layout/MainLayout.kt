@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -31,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import mx.dev.shellcore.atomicfunctiondemo.R
 import mx.dev.shellcore.atomicfunctiondemo.ui.theme.AtomicFunctionDemoTheme
+import mx.dev.shellcore.atomicfunctiondemo.view.model.InfoVO
 import mx.dev.shellcore.atomicfunctiondemo.view.util.LoadingStatus
 import mx.dev.shellcore.atomicfunctiondemo.view.vm.MainViewModel
 
@@ -38,16 +38,29 @@ import mx.dev.shellcore.atomicfunctiondemo.view.vm.MainViewModel
 @Composable
 fun MainLayoutPreview() {
     AtomicFunctionDemoTheme {
-        MainLayout()
+        MainLayout(
+            InfoVO(
+                loading = LoadingStatus.LOADING,
+                info = null
+            )
+        )
     }
 }
 
 @Composable
-fun MainLayout() {
-
+fun MainLayoutParent() {
     val vm: MainViewModel = viewModel()
     val infoVO = vm.infoVO.collectAsState().value
+    MainLayout(infoVO = infoVO) {
+        vm.loadInfo()
+    }
+}
 
+@Composable
+fun MainLayout(
+    infoVO: InfoVO,
+    onClickLoadInfo: () -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -129,7 +142,7 @@ fun MainLayout() {
         Button(
             modifier = Modifier.fillMaxWidth(),
             onClick = {
-                vm.loadInfo()
+                onClickLoadInfo()
             }
         ) {
             Text(text = "Load info")

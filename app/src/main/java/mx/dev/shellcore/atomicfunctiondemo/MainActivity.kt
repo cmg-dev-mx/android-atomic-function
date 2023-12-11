@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
 import mx.dev.shellcore.atomicfunctiondemo.ui.theme.AtomicFunctionDemoTheme
 import mx.dev.shellcore.atomicfunctiondemo.view.layout.MainLayout
+import mx.dev.shellcore.atomicfunctiondemo.view.layout.MainLayoutParent
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainLayout()
+                    MainLayoutParent()
                 }
             }
         }

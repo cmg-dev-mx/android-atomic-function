@@ -15,18 +15,33 @@ class InfoRepositoryImpl @Inject constructor(
     private val apiSource: ApiSource
 ) : InfoRepository {
 
+    private var updatedTime: Long = 0L
+
     override suspend fun getInfo(): Flow<Result<Info>> {
         return flow {
             if (dbSource.containInfo()) {
                 emit(Result.success(dbSource.getInfo()))
             }
-            if (apiSource.requireUpdateTime()) {
+            if (requireUpdateTime()) {
                 emit(Result.failure(NotUpdatedException("Require update from API")))
                 val info = apiSource.getInfo()
-                apiSource.updateTime(Calendar.getInstance().timeInMillis)
                 dbSource.saveInfo(info)
+                updateTime(Calendar.getInstance().timeInMillis)
                 emit(Result.success(info))
             }
         }
+    }
+
+    private fun requireUpdateTime(): Boolean {
+        return if (updatedTime == 0L) {
+            true
+        } else {
+            val currentTime = java.util.Calendar.getInstance().timeInMillis
+            currentTime - updatedTime > 10000 // 10 seconds
+        }
+    }
+
+    private fun updateTime(timeInMillis: Long) {
+        updatedTime = timeInMillis
     }
 }
