@@ -12,7 +12,9 @@ import mx.dev.shellcore.atomicfunctiondemo.view.util.LoadingStatus
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val useCase: InfoUseCase): ViewModel() {
+class MainViewModel @Inject constructor(
+    private val useCase: InfoUseCase
+): ViewModel() {
 
     private val _infoVO = MutableStateFlow(InfoVO())
     val infoVO = _infoVO.asStateFlow()
