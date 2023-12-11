@@ -5,4 +5,5 @@ import mx.dev.shellcore.atomicfunctiondemo.core.model.Info
 interface DatabaseSource {
     suspend fun containInfo(): Boolean
     suspend fun getInfo(): Info
+    suspend fun saveInfo(info: Info)
 }

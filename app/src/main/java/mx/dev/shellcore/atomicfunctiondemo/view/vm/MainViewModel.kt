@@ -6,6 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import mx.dev.shellcore.atomicfunctiondemo.core.exception.NotUpdatedException
 import mx.dev.shellcore.atomicfunctiondemo.core.usecase.InfoUseCase
 import mx.dev.shellcore.atomicfunctiondemo.view.model.InfoVO
 import mx.dev.shellcore.atomicfunctiondemo.view.util.LoadingStatus
@@ -26,7 +27,11 @@ class MainViewModel @Inject constructor(
                 result.onSuccess {
                     _infoVO.value = InfoVO(it, LoadingStatus.SUCCESS)
                 }.onFailure {
-                    _infoVO.value = InfoVO(loading = LoadingStatus.ERROR)
+                    if (it is NotUpdatedException) {
+                        _infoVO.value = InfoVO(_infoVO.value.info, LoadingStatus.LOADING)
+                    } else {
+                        _infoVO.value = InfoVO(loading = LoadingStatus.ERROR)
+                    }
                 }
             }
         }

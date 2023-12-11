@@ -6,13 +6,17 @@ import javax.inject.Inject
 
 class DatabaseSourceImpl @Inject constructor() : DatabaseSource {
 
-    private var containInfo = false
+    private var info: Info? = null
 
     override suspend fun containInfo(): Boolean {
-        return containInfo
+        return info != null
     }
 
     override suspend fun getInfo(): Info {
         return Info("Atomic Function", "This is a demo of Atomic Function from the db")
+    }
+
+    override suspend fun saveInfo(info: Info) {
+        this.info = info
     }
 }
