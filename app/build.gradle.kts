@@ -63,6 +63,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
 
     implementation("com.google.dagger:hilt-android:2.48")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
 
     testImplementation("junit:junit:4.13.2")
