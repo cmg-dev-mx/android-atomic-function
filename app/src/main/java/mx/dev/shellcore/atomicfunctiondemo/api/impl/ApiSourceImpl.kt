@@ -13,7 +13,7 @@ class ApiSourceImpl @Inject constructor() : ApiSource {
 
 
     override suspend fun getInfo(): Info {
-        delay(2.seconds)
+        delay(5.seconds)
         return Info("Atomic Function", "This is a demo of Atomic Function from the api")
     }
 }

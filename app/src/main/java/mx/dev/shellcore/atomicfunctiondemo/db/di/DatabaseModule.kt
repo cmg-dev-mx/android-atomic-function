@@ -4,11 +4,12 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
 import mx.dev.shellcore.atomicfunctiondemo.db.impl.DatabaseSourceImpl
 import mx.dev.shellcore.atomicfunctiondemo.repository.db.DatabaseSource
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 abstract class DatabaseModule {
 
     @Binds

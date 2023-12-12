@@ -1,12 +1,13 @@
 package mx.dev.shellcore.atomicfunctiondemo.core.usecase
 
+import kotlinx.coroutines.flow.Flow
+import mx.dev.shellcore.atomicfunctiondemo.core.model.Info
 import mx.dev.shellcore.atomicfunctiondemo.core.repository.InfoRepository
 import javax.inject.Inject
-import javax.inject.Singleton
 
-class InfoUseCaseImpl @Inject constructor(
+class SecondaryInfoUseCaseImpl @Inject constructor(
     private val repository: InfoRepository
-) : InfoUseCase {
+) : SecondaryInfoUseCase {
 
     override suspend fun getInfo() = repository.getInfo()
 }

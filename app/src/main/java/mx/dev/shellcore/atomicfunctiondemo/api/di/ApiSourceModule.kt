@@ -4,11 +4,12 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
 import mx.dev.shellcore.atomicfunctiondemo.api.impl.ApiSourceImpl
 import mx.dev.shellcore.atomicfunctiondemo.repository.api.ApiSource
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 abstract class ApiSourceModule {
 
     @Binds

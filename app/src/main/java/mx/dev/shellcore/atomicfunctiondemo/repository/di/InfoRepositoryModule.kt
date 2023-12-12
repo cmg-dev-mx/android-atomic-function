@@ -4,11 +4,12 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
 import mx.dev.shellcore.atomicfunctiondemo.core.repository.InfoRepository
 import mx.dev.shellcore.atomicfunctiondemo.repository.impl.InfoRepositoryImpl
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 abstract class InfoRepositoryModule {
 
     @Binds
